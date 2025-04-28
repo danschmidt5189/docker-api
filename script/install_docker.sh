@@ -1,6 +1,9 @@
 #!/bin/bash -ex
 
-${DOCKER_VERSION:?You must set the 'DOCKER_VERSION' environment variable}
+if [ -z "${DOCKER_VERSION}" ]; then
+  echo "You must set the 'DOCKER_VERSION' environment variable"
+  exit 1
+fi
 
 apt-get remove -y \
   docker \
