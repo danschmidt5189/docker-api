@@ -31,6 +31,8 @@ jobs:
           DOCKER_VERSION: ${{ matrix.docker_version }}
         run: sudo ./script/install_docker.sh "${DOCKER_VERSION}"
       - name: spec tests
+        env:
+          RUN_SWARM_TESTS: 'true'
         run: bundle exec rake
 
   podman-rspec:

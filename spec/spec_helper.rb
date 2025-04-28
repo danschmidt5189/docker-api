@@ -1,18 +1,16 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
+require 'faker'
 require 'rspec/its'
-
 require 'single_cov'
 
 # avoid coverage failure from lower docker versions not running all tests
 SingleCov.setup :rspec
 
 require 'docker'
-
 ENV['DOCKER_API_USER']  ||= 'debbie_docker'
 ENV['DOCKER_API_PASS']  ||= '*************'
 ENV['DOCKER_API_EMAIL'] ||= 'debbie_docker@example.com'
@@ -41,4 +39,7 @@ RSpec.configure do |config|
   config.formatter = :documentation
   config.tty = true
   config.include SpecHelpers
+  if !ENV['RUN_SWARM_TESTS']
+    config.filter_run_excluding :requires_swarm_mode
+  end
 end
