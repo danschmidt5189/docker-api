@@ -41,6 +41,7 @@ describe Docker::Secret, :requires_swarm_mode do
       expect(secret.id).to eq created.id
       expect(secret.version).to be_truthy
       expect(secret.created_at).to be_truthy
+      expect(secret.updated_at).to be_truthy
       expect(secret.name).to eq('docker-api-rspec-secret')
       expect(secret.labels).to eq labels
       expect(secret.spec).to eq({
