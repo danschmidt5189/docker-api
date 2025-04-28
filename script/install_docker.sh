@@ -1,9 +1,6 @@
 #!/bin/bash -ex
 
-if [ -z "${DOCKER_VERSION}" ]; then
-  echo "You must set the 'DOCKER_VERSION' environment variable"
-  exit 1
-fi
+docker_version="${1:?Pass DOCKER_VERSION as first argument}"
 
 apt-get remove -y \
   docker \
@@ -27,10 +24,10 @@ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(
 apt-get update -y
 apt-cache gencaches
 apt-get install -y \
-  docker-ce=$( apt-cache madison docker-ce | grep -e $DOCKER_VERSION | cut -f 2 -d '|' | head -1 | sed 's/\s//g' )
+  docker-ce=$( apt-cache madison docker-ce | grep -e $docker_version | cut -f 2 -d '|' | head -1 | sed 's/\s//g' )
 
 if [ $? -ne 0 ]; then
-  echo "Error: Could not install ${DOCKER_VERSION}"
+  echo "Error: Could not install ${docker_version}"
   echo "Available docker versions:"
   apt-cache madison docker-ce
   exit 1

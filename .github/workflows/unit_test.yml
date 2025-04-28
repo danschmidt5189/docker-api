@@ -29,7 +29,7 @@ jobs:
       - name: install docker
         env:
           DOCKER_VERSION: ${{ matrix.docker_version }}
-        run: sudo ./script/install_docker.sh
+        run: sudo ./script/install_docker.sh "${DOCKER_VERSION}"
       - name: spec tests
         run: bundle exec rake
 
