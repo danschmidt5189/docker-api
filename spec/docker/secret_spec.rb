@@ -2,6 +2,8 @@
 
 require 'spec_helper'
 
+SingleCov.covered!
+
 describe Docker::Secret, :requires_swarm_mode do
   before(:each) do
     Docker::Secret
