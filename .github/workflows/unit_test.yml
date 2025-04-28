@@ -1,13 +1,7 @@
 name: Unit Tests
 on:
   push:
-    branches:
-      # A test branch for seeing if your tests will pass in your personal fork
-      - test_me_github
   pull_request:
-    branches:
-      - main
-      - master
   workflow_dispatch:
 jobs:
   docker-rspec:
