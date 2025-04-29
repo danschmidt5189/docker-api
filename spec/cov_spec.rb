@@ -15,6 +15,7 @@ describe "Coverage" do
       lib/docker/error.rb
       lib/docker/messages_stack.rb
       lib/docker/rake_task.rb
+      lib/docker/swarm.rb
       lib/docker/version.rb
       lib/docker-api.rb
       lib/excon/middlewares/hijack.rb
