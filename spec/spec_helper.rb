@@ -15,9 +15,17 @@ ENV['DOCKER_API_USER']  ||= 'debbie_docker'
 ENV['DOCKER_API_PASS']  ||= '*************'
 ENV['DOCKER_API_EMAIL'] ||= 'debbie_docker@example.com'
 
-RSpec.shared_context "local paths" do
+RSpec.shared_context 'local paths' do
   def project_dir
     File.expand_path(File.join(File.dirname(__FILE__), '..'))
+  end
+end
+
+RSpec.shared_context 'check for swarm' do
+  before do |example|
+    next if ENV['RUN_SWARM_TESTS']
+    next unless described_class && described_class.include?(Docker::Swarm)
+    skip 'Swarm mode is required to run this test'
   end
 end
 
@@ -39,7 +47,6 @@ RSpec.configure do |config|
   config.formatter = :documentation
   config.tty = true
   config.include SpecHelpers
-  if !ENV['RUN_SWARM_TESTS']
-    config.filter_run_excluding :requires_swarm_mode
-  end
+  config.include_context 'local paths'
+  config.include_context 'check for swarm'
 end

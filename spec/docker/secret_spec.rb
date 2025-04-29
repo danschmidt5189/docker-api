@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-SingleCov.covered!
+SingleCov.covered! if ENV['RUN_SWARM_TESTS']
 
 describe Docker::Secret, :requires_swarm_mode do
   before(:each) do

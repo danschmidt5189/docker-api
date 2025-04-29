@@ -3,7 +3,7 @@
 require 'base64'
 
 class Docker::Secret
-  include Docker::Base
+  include Docker::Swarm
 
   API_BASE = 'secrets'.freeze
 
